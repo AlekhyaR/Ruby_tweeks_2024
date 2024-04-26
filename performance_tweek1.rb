@@ -32,7 +32,8 @@ $ ruby test.rb
 But something is a bit off here. The Ruby implementation has a subtle mistake which causes signficantly more work than it needs to.
 
 Ruby’s multiple assignment a, b = b, a + b is equivalent to a, b = [b, a + b]. Most of the time that Array allocation doesn’t actually happen, 
-but because in this case it’s the last line of the block, and because Ruby has an implicit return at the end of the block the Array is required (even though Integer#times doesn’t use the return we don’t yet have an optimization which “knows” that).
+but because in this case it’s the last line of the block, and because Ruby has an implicit return at the end of the block the Array is required 
+(even though Integer#times doesn’t use the return we don’t yet have an optimization which “knows” that).
 
 Let’s see how we do avoiding that… (with a slightly unsightly ; nil replacing the return)
 
